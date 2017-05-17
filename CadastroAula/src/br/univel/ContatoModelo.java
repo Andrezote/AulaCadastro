@@ -9,9 +9,20 @@ public class ContatoModelo extends AbstractTableModel{
 	
 	List<Contato> lista;
 	
+	public ContatoModelo() {
+		this((List<Contato>)null);
+	}
+	
 	public ContatoModelo(List<Contato> list) {
 		if(list  == null){
 			this.lista = new ArrayList<>();
+			for(int i = 0; i< 10; i++){
+				Contato c = new Contato();
+				c.setId(i);
+				c.setNome("Nome " + i);
+				c.setTelefone("Telefone " + i);
+				lista.add(c);
+			}
 		}else{
 			this.lista = list;
 		}
@@ -58,6 +69,15 @@ public class ContatoModelo extends AbstractTableModel{
 	public void adiconar(Contato c) {
 		this.lista.add(c);
 		fireTableDataChanged();
+	}
+
+	public Contato getContato(int idx) {
+		return lista.get(idx);
+	}
+
+	public void exclui(Contato contatoSelecionado) {
+		this.lista.remove(contatoSelecionado);
+		this.fireTableDataChanged();
 	}
 
 }
